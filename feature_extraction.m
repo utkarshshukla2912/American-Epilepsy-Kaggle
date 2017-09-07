@@ -4,6 +4,7 @@ main_array = interictal_segment_1.data;
 frequency = interictal_segment_1.sampling_frequency;
 channel_one = main_array(1,:);
 n = length(channel_one);
+
 % Time series to frequency 
 FT = real(fft(channel_one));
 

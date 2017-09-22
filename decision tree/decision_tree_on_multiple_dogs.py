@@ -17,19 +17,6 @@ y_train = df_train['Class']
 x_test = df_test.drop(['Class'], axis = 1)
 y_test = df_test['Class']
 
-
-# Implementing Standard Scaler on Power Spectral Density
-'''
-#scaler = StandardScaler()
-columns_to_scale = ['psd1','psd2','psd3','psd4','psd5']
-for column in columns_to_scale:
-	scaler.fit(np.array(x_train[column]))
-	x_train[column] = scaler.transform(np.array(x_train[column]))
-	scaler.fit(np.array(x_test[column]))
-	x_test[column] = scaler.transform(x_test[column])
-'''
-
-
 clf = DecisionTreeClassifier(random_state=0)
 clf.fit(x_train, y_train)
 prediction = clf.predict(x_test)
@@ -37,7 +24,6 @@ y_test_list = list(y_test)
 true_values = []
 number_of_correct1 = 0
 number_of_wrong1 = 0
-
 
 # Finding Total Number of misclassifications
 if len(prediction) == len(y_test_list):

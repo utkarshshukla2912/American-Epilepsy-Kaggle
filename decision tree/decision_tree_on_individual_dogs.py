@@ -24,18 +24,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.33)
 print("1 in Y train: ",list(y_train).count(1),"1 in Y test: ",list(y_test).count(1))
 print("0 in Y train: ",list(y_train).count(0),"0 in Y test: ",list(y_test).count(0))
 
-# Implementing Standard Scaler on Power Spectral Density
-'''
-scaler = StandardScaler()
-columns_to_scale = ['psd1','psd2','psd3','psd4','psd5']
-for column in columns_to_scale:
-	scaler.fit(np.array(x_train[column]))
-	x_train[column] = scaler.transform(np.array(x_train[column]))
-	scaler.fit(np.array(x_test[column]))
-	x_test[column] = scaler.transform(x_test[column])
-'''
-
-
+# Classifier Declaration
 clf = DecisionTreeClassifier(random_state=0)
 clf.fit(x_train, y_train)
 prediction = clf.predict(x_test)
@@ -63,7 +52,6 @@ print("Number of correct one prediction: ",number_of_correct1)
 print("Number of wrong one prediction: ",number_of_wrong1)
 print("DT: Predictions ",list(set(prediction)))
 print("DT: ",clf.score(x_test, y_test))
-
 
 
 # Compute confusion matrix

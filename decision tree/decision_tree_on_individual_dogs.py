@@ -8,7 +8,7 @@ import itertools
 from sklearn.metrics import confusion_matrix,precision_recall_curve,auc,roc_auc_score,roc_curve,recall_score,classification_report
 
 
-df = pd.read_csv('../../files/Dog_5_train.csv')
+df = pd.read_csv('../../files/Dog5_train_sample_feature_ext.csv')
 X = df.drop(['Class',], axis = 1)
 Y = df['Class']
 
@@ -71,14 +71,6 @@ cnf_matrix = confusion_matrix(y_test,prediction)
 np.set_printoptions(precision=2)
 
 print "Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1])
-
-# Plot non-normalized confusion matrix
-class_names = [0,1]
-plt.figure()
-plot_confusion_matrix(cnf_matrix
-                      , classes=class_names
-                      , title='Confusion matrix')
-
 
 # Calculation of Precision for our Prediction
 print "Precision: ", np.true_divide(cnf_matrix[1,1],(cnf_matrix[0,1]+cnf_matrix[1,1]))

@@ -6,6 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix,precision_recall_curve,auc,roc_auc_score,roc_curve,recall_score,classification_report
 import itertools
+from sklearn.metrics import roc_auc_score
 
 
 df_train = pd.read_csv('../../files/Train_sample.csv')
@@ -40,8 +41,6 @@ if len(prediction) == len(y_test_list):
 # Dataset Values After Prediction         
 print('Number of correct predictions: ',true_values.count(1))
 print('Number of wrong predictions: ',true_values.count(0))			
-print("Number of correct one prediction: ",number_of_correct1)
-print("Number of wrong one prediction: ",number_of_wrong1)
 print("DT: Predictions ",list(set(prediction)))
 print("DT: ",clf.score(x_test, y_test))
 
@@ -52,12 +51,7 @@ np.set_printoptions(precision=2)
 
 print "Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1])
 
-# Plot non-normalized confusion matrix
-class_names = [0,1]
-plt.figure()
-plot_confusion_matrix(cnf_matrix
-                      , classes=class_names
-                      , title='Confusion matrix')
+
 
 
 # Calculation of Precision for our Prediction
@@ -71,6 +65,8 @@ print "Recall: ", recall
 precision=np.true_divide(cnf_matrix[1,1],(cnf_matrix[0,1]+cnf_matrix[1,1]))
 f1score=2*np.true_divide(precision*recall,(precision+recall))
 print "F1 Score: ", f1score
+
+print('ROC curve',roc_auc_score(y_test, prediction))
 
 # printing important features
 column_list = list(x_train)

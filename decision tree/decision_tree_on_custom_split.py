@@ -9,6 +9,7 @@ from sklearn import model_selection
 import matplotlib.pyplot as plt
 from sklearn.cross_validation import KFold, cross_val_score
 from sklearn.metrics import confusion_matrix,precision_recall_curve,auc,roc_auc_score,roc_curve,recall_score,classification_report 
+from sklearn.metrics import roc_auc_score
 
 
 # Reading Training Data
@@ -67,8 +68,6 @@ for i in range(0,len(prediction)):
 
 print('Number of correct prediction: ', correct_prediction.count(1))
 print('Number of wrong prediction: ', correct_prediction.count(0))
-print('Number of correct ones predicted: ', correct_one)
-print('Number of wrong ones predicted: ', wrong_one)
 print("DT: Predictions ",list(set(prediction)))
 print("DT: ",clf.score(x_test, y_test))
 unique, counts = np.unique(prediction, return_counts=True)
@@ -95,6 +94,7 @@ precision=np.true_divide(cnf_matrix[1,1],(cnf_matrix[0,1]+cnf_matrix[1,1]))
 f1score=2*np.true_divide(precision*recall,(precision+recall))
 print "F1 Score: ", f1score
 
+print 'ROC curve',roc_auc_score(y_test, prediction)
 # printing important features
 column_list = list(x_train)
 arr = clf.feature_importances_

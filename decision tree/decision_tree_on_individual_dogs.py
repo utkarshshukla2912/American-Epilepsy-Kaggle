@@ -6,9 +6,10 @@ from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 import itertools
 from sklearn.metrics import confusion_matrix,precision_recall_curve,auc,roc_auc_score,roc_curve,recall_score,classification_report
+from sklearn.metrics import roc_auc_score
 
 
-df = pd.read_csv('../../files/Dog5_train_sample_feature_ext.csv')
+df = pd.read_csv('../../files/Dog1_train_sample_feature_ext.csv')
 X = df.drop(['Class',], axis = 1)
 Y = df['Class']
 
@@ -48,8 +49,6 @@ if len(prediction) == len(y_test_list):
 # Dataset Values After Prediction			
 print('Number of correct predictions: ',true_values.count(1))
 print('Number of wrong predictions: ',true_values.count(0))			
-print("Number of correct one prediction: ",number_of_correct1)
-print("Number of wrong one prediction: ",number_of_wrong1)
 print("DT: Predictions ",list(set(prediction)))
 print("DT: ",clf.score(x_test, y_test))
 
@@ -71,6 +70,8 @@ print "Recall: ", recall
 precision=np.true_divide(cnf_matrix[1,1],(cnf_matrix[0,1]+cnf_matrix[1,1]))
 f1score=2*np.true_divide(precision*recall,(precision+recall))
 print "F1 Score: ", f1score
+
+print('ROC curve',roc_auc_score(y_test, prediction))
 
 # printing important features
 column_list = list(x_train)
